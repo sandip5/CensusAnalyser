@@ -10,6 +10,10 @@ public class CensusAnalyserTest {
 
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
+    private static final String WRONG_CSV_FILE_TYPE_PATH = "./src/test/resources/IndiaStateCensusData.txt";
+    private static final String DELIMITER_PROBLEM_CSV_FILE_PATH = "./src/test/resources/DelimiterProblem.csv";
+    private static final String HEADER_PROBLEM_CSV_FILE_PATH = "./src/test/resources/HeaderProblem.csv";
+    private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
 
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords() {
@@ -27,17 +31,6 @@ public class CensusAnalyserTest {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
-        } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
-        }
-    }
-    @Test
-    public void givenIndiaCensusData_WithRightFile_ButTypeIncorrect_ShouldThrowException() {
-        try {
-            CensusAnalyser censusAnalyser = new CensusAnalyser();
-            ExpectedException exceptionRule = ExpectedException.none();
-            exceptionRule.expect(CensusAnalyserException.class);
-            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }

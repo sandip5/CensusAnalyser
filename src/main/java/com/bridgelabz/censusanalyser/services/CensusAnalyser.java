@@ -26,12 +26,12 @@ public class CensusAnalyser {
             Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
             int numberOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
             return numberOfEntries;
+        } catch (RuntimeException e){
+            throw new CensusAnalyserException(e.getMessage(),
+                    ExceptionType.DELIMITER_AND_HEADER_PROBLEM);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     ExceptionType.CENSUS_FILE_PROBLEM);
-        } catch (IllegalStateException e){
-            throw new CensusAnalyserException(e.getMessage(),
-                    ExceptionType.UNABLE_TO_PARSE);
         }
     }
 }
